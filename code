@@ -1,0 +1,152 @@
+long timeStamp = 0;
+
+boolean winning = false;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(13, OUTPUT);
+  digitalWrite(2, HIGH);
+  delay(500);
+  digitalWrite(3, HIGH);
+  delay(500);
+  digitalWrite(4, HIGH);
+  delay(500);
+  digitalWrite(5, HIGH);
+  delay(500);
+  digitalWrite(6, HIGH);
+  delay(500);
+  digitalWrite(7, HIGH);
+  delay(500);
+  digitalWrite(8, HIGH);
+  delay(500);
+  digitalWrite(9, HIGH);
+  delay(500);
+  digitalWrite(10, HIGH);
+  delay(500);
+}
+
+void loop()
+{
+
+  int reading = analogRead(A0);
+  
+  if (reading > 5.4)
+  {
+    digitalWrite(10, HIGH);
+    
+  }
+  else
+  {
+    digitalWrite(10, LOW);
+    
+  }
+
+  if (reading > 4.75)
+  {
+    digitalWrite(9, HIGH);
+  }
+  else
+  {
+    digitalWrite(9, LOW);
+  }
+
+  if (reading > 4.1)
+  {
+    digitalWrite(8, HIGH);
+  }
+  else
+  {
+    digitalWrite(8, LOW);
+  }
+
+
+
+  if (reading > 3.45)
+  {
+    digitalWrite(7, HIGH);
+  }
+  else
+  {
+    digitalWrite(7, LOW);
+  }
+
+
+  if (reading > 2.8)
+  {
+    digitalWrite(6, HIGH);
+  }
+  else
+  {
+    digitalWrite(6, LOW);
+  }
+
+
+  if (reading > 2.15)
+  {
+    digitalWrite(5, HIGH);
+  }
+  else
+  {
+    digitalWrite(5, LOW);
+  }
+
+  if (reading > 1.5)
+  {
+    digitalWrite(4, HIGH);
+  }
+  else
+  {
+    digitalWrite(4, LOW);
+  }
+
+  if (reading > 0.85)
+  {
+    digitalWrite(3, HIGH);
+  }
+  else
+  {
+    digitalWrite(3 , LOW);
+  }
+
+
+  if (reading < .2)
+  {
+    digitalWrite(2, HIGH);
+  }
+
+  else
+  {
+    digitalWrite(2, LOW);
+  }
+
+  // check for failure
+  if (reading < .2 || reading > 5.4) { 
+     // reset out timer, you're failing
+     timeStamp = millis();
+  }
+
+  // check to see how long you've been winning
+  if (millis() - timeStamp > 5000) {
+     digitalWrite(13, HIGH);
+    
+     
+   } else {
+     digitalWrite(13, LOW);
+     
+   }
+  
+
+   
+  //up by .3
+  Serial.println(reading);
+  delay(15);
+}
